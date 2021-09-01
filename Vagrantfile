@@ -11,7 +11,8 @@ Vagrant.configure("2") do |config|
   # general setup
   config.vm.define "alice" do |alice|
     alice.vm.hostname = "alice"
-    alice.vm.box = "generic/ubuntu2004"
+    alice.vm.box = "peru/ubuntu-20.04-server-amd64"
+    # alice.vm.box = "generic/ubuntu2004"
     # alice.ssh.forward_agent = true
     # alice.ssh.forward_x11 = true
 
@@ -49,6 +50,7 @@ Vagrant.configure("2") do |config|
       update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
       update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 100
       # no apt packages available unfortunately
+      apt install snapd
       snap install shfmt
       snap install bash-language-server
 
