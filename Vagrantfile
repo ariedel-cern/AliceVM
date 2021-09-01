@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
     alice.vm.provision "shell", inline: <<-SHELL
 
       echo "Set Timezone"
-      timedatectl set-timezon Europe/Berlin
+      timedatectl set-timezone Europe/Berlin
 
       echo "update system"
       apt update
@@ -42,14 +42,15 @@ Vagrant.configure("2") do |config|
       # can be found here
       # https://alice-doc.github.io/alice-analysis-tutorial/building/prereq-ubuntu.html
       echo "install prerequisites"
-      apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin python3-dev python3-pip entr htop
+      apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin python3-dev python3-pip entr htop moreutils
 
       echo "install build tools"
-      apt install -y neovim clang-tools-12 clangd-12 clang-format-12 neovim python3-pynvim tmux tmuxp fzf ripgrep
+      apt install -y clang-tools-12 clangd-12 clang-format-12 neovim python3-pynvim tmux tmuxp fzf ripgrep
       update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
       update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 100
       # no apt packages available unfortunately
-      snap install shfmt bash-language-server
+      snap install shfmt
+      snap install bash-language-server
 
       # best way to install alibuild
       echo "add ppa for alibuild"
@@ -62,6 +63,14 @@ Vagrant.configure("2") do |config|
       echo "clean up"
       apt autoremove -y
       apt autoclean -y
+
+      echo "Install root standalone"
+      pushd /home/vagrant
+      wget "https://root.cern/download/root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz"
+      tar xfv root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
+      rm root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
+      chown -R vagrant:vagrant root
+      popd
 
       # better run this interactively inside the machine
       # echo "setup aliroot"

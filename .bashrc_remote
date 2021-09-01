@@ -1,0 +1,17 @@
+#!/bin/bash
+# File              : .bashrc_remote
+# Author            : Anton Riedel <anton.riedel@tum.de>
+# Date              : 09.08.2021
+# Last Modified Date: 01.09.2021
+# Last Modified By  : Anton Riedel <anton.riedel@tum.de>
+
+# source environment variables for aliphysics development
+export ALICE=$HOME
+export ALICE_ANALYSIS=$ALICE/Analysis
+export GRID_UTILITY_SCRIPTS=$ALICE/GridUtilityScripts
+
+# activate root
+source $HOME/root/bin/thisroot.sh
+
+# [ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
+# [ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash
