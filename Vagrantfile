@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
 
     # libvirt setup
     alice.vm.provider :libvirt do |v|
-      v.memory = 3072
+      v.memory = 4096
       v.cpus = 4
 
       # network
@@ -64,13 +64,13 @@ Vagrant.configure("2") do |config|
       apt autoremove -y
       apt autoclean -y
 
-      echo "Install root standalone"
-      pushd /home/vagrant
-      wget "https://root.cern/download/root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz"
-      tar xfv root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
-      rm root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
-      chown -R vagrant:vagrant root
-      popd
+      # echo "Install root standalone"
+      # pushd /home/vagrant
+      # wget "https://root.cern/download/root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz"
+      # tar xfv root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
+      # rm root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
+      # chown -R vagrant:vagrant root
+      # popd
 
       # better run this interactively inside the machine
       # echo "setup aliroot"
