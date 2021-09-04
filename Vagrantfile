@@ -43,10 +43,10 @@ Vagrant.configure("2") do |config|
       # can be found here
       # https://alice-doc.github.io/alice-analysis-tutorial/building/prereq-ubuntu.html
       echo "install prerequisites"
-      apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin python3-dev python3-pip entr htop moreutils
+      apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin python3-dev python3-pip 
 
       echo "install build tools"
-      apt install -y clang-tools-12 clangd-12 clang-format-12 neovim python3-pynvim tmux tmuxp fzf ripgrep
+      apt install -y clang-tools-12 clangd-12 clang-format-12 neovim python3-pynvim tmux tmuxp fzf ripgrep entr htop moreutils parallel
       update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
       update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 100
       # no apt packages available unfortunately
