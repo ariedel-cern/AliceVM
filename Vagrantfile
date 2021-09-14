@@ -66,6 +66,7 @@ Vagrant.configure("2") do |config|
       apt autoremove -y
       apt autoclean -y
 
+      # run if needed
       # echo "Install root standalone"
       # pushd /home/vagrant
       # wget "https://root.cern/download/root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz"
@@ -76,11 +77,13 @@ Vagrant.configure("2") do |config|
 
       # better run this interactively inside the machine
       # echo "setup aliroot"
+      # pushd /home/vagrant
       # mkdir alice
       # cd alice
       # aliBuild init AliPhysics@master
       # aliDoctor AliPhysics --defaults next-root6
       # aliBuild build AliPhysics --defaults user-next-root6 --debug
+      # popd
 
     SHELL
   end
