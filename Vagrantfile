@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
       update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
       update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 100
       # no apt packages available unfortunately
-      apt install snapd
+      apt install -y snapd
       snap install shfmt
       snap install bash-language-server
 
@@ -77,12 +77,11 @@ Vagrant.configure("2") do |config|
 
       # better run this interactively inside the machine
       # echo "setup aliroot"
-      # pushd /home/vagrant
-      # mkdir alice
-      # cd alice
+      # mkdir /home/vagrant/alice
+      # pushd /home/vagrant/alice
       # aliBuild init AliPhysics@master
       # aliDoctor AliPhysics --defaults next-root6
-      # aliBuild build AliPhysics --defaults user-next-root6 --debug
+      # aliBuild build AliPhysics --defaults user-next-root6 --always-prefer-system --debug
       # popd
 
     SHELL
