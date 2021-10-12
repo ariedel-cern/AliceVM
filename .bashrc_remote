@@ -2,13 +2,15 @@
 # File              : .bashrc_remote
 # Author            : Anton Riedel <anton.riedel@tum.de>
 # Date              : 09.08.2021
-# Last Modified Date: 01.09.2021
+# Last Modified Date: 12.10.2021
 # Last Modified By  : Anton Riedel <anton.riedel@tum.de>
 
-# source environment variables for aliphysics development
-export ALICE=$HOME
-export ALICE_ANALYSIS=$ALICE/Analysis
-export GRID_UTILITY_SCRIPTS=$ALICE/GridUtilityScripts
+# setup for aliphysics development
+export ALICE="$HOME/alice"
+export ALICE_ANALYSIS="$HOME/Analysis"
+export GRID_UTILITY_SCRIPTS="$HOME/GridUtilityScripts"
+alias ali="pushd $ALICE && alienv enter AliPhysics/latest --shellrc && popd"
+[ -d "$HOME/GridUtilityScripts" ] && source $HOME/GridUtilityScripts/SetupEnv.sh &>/dev/null
 
 # activate root
 # source $HOME/root/bin/thisroot.sh
