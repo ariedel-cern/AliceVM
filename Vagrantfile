@@ -13,24 +13,20 @@ Vagrant.configure("2") do |config|
     alice.vm.hostname = "alice"
     # alice.vm.box = "generic/ubuntu1804"
     alice.vm.box = "generic/ubuntu2004"
-    # alice.ssh.forward_agent = true
-    # alice.ssh.forward_x11 = true
 
     # libvirt setup
     alice.vm.provider :libvirt do |v|
       v.memory = 4096
       v.cpus = 4
 
-      # network
-      # alice.vm.network "private_network", ip: "192.168.121.31"
     end
-
 
     # share data between host and guest
     alice.vm.synced_folder "home", "/home/vagrant", type: "nfs", nfs_udp: false, nfs_version: 4
 
     # provisioning
     alice.vm.provision "shell", inline: <<-SHELL
+#!/bin/bash
 
 echo "Set Timezone"
 timedatectl set-timezone Europe/Berlin
@@ -39,10 +35,17 @@ echo "update system"
 apt update
 apt upgrade -y
 
-# can be found here
 # https://alice-doc.github.io/alice-analysis-tutorial/building/prereq-ubuntu.html
+# with some additions
 echo "install prerequisites"
-apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin libgsl-dev python3-dev python3-pip libboost-all-dev libcgal-dev libcgal-dev vc-dev libfastjet-dev libfastjet-fortran-dev libfastjetplugins-dev libfastjettools-dev
+apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin libgsl-dev python3-dev python3-pip libboost-all-dev libcgal-dev libcgal-dev vc-dev libfastjet-dev libfastjet-fortran-dev libfastjetplugins-dev libfastjettools-dev gcc-10 g++-10 gfortran-10 clang-12
+
+echo "update symlinks to point to newest compilers (at least for ubuntu 20.04)"
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
+update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-10 100
+update-alternatives --install /usr/bin/clang clang /usr/bin/clang-12 100
+update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-12 100
 
 echo "install build tools"
 apt install -y clang-tools-12 clangd-12 clang-format-12 neovim python3-pynvim tmux tmuxp fzf ripgrep fd-find entr htop moreutils parallel
@@ -52,15 +55,15 @@ update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-
 apt install -y snapd
 snap install shfmt
 snap install bash-language-server
-#get newest cmake so we do not need to build it later
+# get updated cmake so we do not need to build it later
 apt purge cmake
-snap install cmake
+snap install cmake --classic
+update-alternatives --install /usr/bin/cmake cmake /snap/bin/cmake 100
 
 # best way to install alibuild
 echo "add ppa for alibuild"
 add-apt-repository ppa:alisw/ppa
 apt update
-
 echo "install alibuild"
 apt install -y python3-alibuild
 
@@ -68,9 +71,9 @@ echo "clean up"
 apt autoremove -y
 apt autoclean -y
 
-# run if needed
-# echo "Install root standalone"
+# install root standalone if needed
 # pushd /home/vagrant
+# update link for newest version
 # wget "https://root.cern/download/root_v6.24.06.Linux-ubuntu20-x86_64-gcc9.3.tar.gz"
 # tar xfv root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
 # rm root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
@@ -86,6 +89,17 @@ apt autoclean -y
 # aliBuild build AliPhysics --defaults user-next-root6 --debug --always-prefer-system
 # popd
 
+# better run this interactively inside the machine
+# echo "setup O2"
+# mkdir /home/vagrant/o2
+# pushd /home/vagrant/o2
+# aliBuild init O2@dev --defaults o2
+# aliBuild init O2Physics@master --defaults o2
+# aliDoctor O2Physics --defaults o2
+# aliBuild build O2Physics --defaults o2 --debug --always-prefer-system
+# popd
+
+exit 0
     SHELL
   end
 end
