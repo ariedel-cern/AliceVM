@@ -2,7 +2,7 @@
 # File              : .bashrc_remote
 # Author            : Anton Riedel <anton.riedel@tum.de>
 # Date              : 09.08.2021
-# Last Modified Date: 12.10.2021
+# Last Modified Date: 19.11.2021
 # Last Modified By  : Anton Riedel <anton.riedel@tum.de>
 
 # setup for aliphysics development
@@ -10,10 +10,13 @@ export ALICE="$HOME/alice"
 export ALICE_ANALYSIS="$HOME/Analysis"
 export GRID_UTILITY_SCRIPTS="$HOME/GridUtilityScripts"
 alias ali="pushd $ALICE && alienv enter AliPhysics/latest --shellrc && popd"
+
+# setup for grid utility scripts
 [ -d "$HOME/GridUtilityScripts" ] && source $HOME/GridUtilityScripts/SetupEnv.sh &>/dev/null
+
+# setup for o2 development
+export O2="$HOME/o2"
+alias o2="pushd $O2 && alienv enter O2Physics/latest --shellrc && popd"
 
 # activate root
 # source $HOME/root/bin/thisroot.sh
-
-# [ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
-# [ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash
