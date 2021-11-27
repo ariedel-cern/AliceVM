@@ -39,7 +39,7 @@ apt upgrade -y
 # https://alice-doc.github.io/alice-analysis-tutorial/building/prereq-ubuntu.html
 # with some additions
 echo "install prerequisites"
-apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin libgsl-dev python3-dev python3-pip libboost-all-dev libcgal-dev libcgal-dev vc-dev libfastjet-dev libfastjet-fortran-dev libfastjetplugins-dev libfastjettools-dev gcc-10 g++-10 gfortran-10 clang-12 libclang-12-dev
+apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin libgsl-dev python3-dev python3-pip libboost-all-dev libcgal-dev vc-dev libfastjet-dev libfastjet-fortran-dev libfastjetplugins-dev libfastjettools-dev gcc-10 g++-10 gfortran-10 clang-12 libclang-12-dev libuv1-dev libutf8proc-dev libfabric-dev libfabric-bin
 
 echo "update symlinks to point to newest compiler version (at least for ubuntu 20.04)"
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
