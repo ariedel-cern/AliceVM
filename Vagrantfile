@@ -1,7 +1,7 @@
 # File              : Vagrantfile
 # Author            : Anton Riedel <anton.riedel@tum.de>
 # Date              : 27.08.2021
-# Last Modified Date: 27.08.2021
+# Last Modified Date: 02.12.2021
 # Last Modified By  : Anton Riedel <anton.riedel@tum.de>
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     # libvirt setup
     alice.vm.provider :libvirt do |v|
       v.memory = 4092
-      # v.memory = 6144
+      # v.memory = 6144 # need for installing root, 4GB are not enough
       v.cpus = 4
 
     end
@@ -57,7 +57,7 @@ apt install -y snapd
 snap install shfmt
 snap install bash-language-server
 # get updated cmake so we do not need to build it later
-apt purge cmake
+apt purge -y cmake
 snap install cmake --classic
 update-alternatives --install /usr/bin/cmake cmake /snap/bin/cmake 100
 
