@@ -1,7 +1,7 @@
 # File              : Vagrantfile
 # Author            : Anton Riedel <anton.riedel@tum.de>
 # Date              : 27.08.2021
-# Last Modified Date: 12.01.2022
+# Last Modified Date: 12.03.2022
 # Last Modified By  : Anton Riedel <anton.riedel@tum.de>
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     end
 
     # share data between host and guest
-    alice.vm.synced_folder "home", "/home/vagrant", type: "nfs", nfs_udp: false, nfs_version: 4
+    alice.vm.synced_folder "vagrant", "/vagrant", type: "nfs", nfs_udp: false, nfs_version: 4
 
     # provisioning
     alice.vm.provision "shell", inline: <<-SHELL
@@ -39,7 +39,7 @@ apt upgrade -y
 # https://alice-doc.github.io/alice-analysis-tutorial/building/prereq-ubuntu.html
 # with some additions
 echo "install prerequisites"
-apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin libgsl-dev python3-dev python3-pip libboost-all-dev libcgal-dev vc-dev libfastjet-dev libfastjet-fortran-dev libfastjetplugins-dev libfastjettools-dev gcc-10 g++-10 gfortran-10 clang-12 libclang-12-dev libuv1-dev libutf8proc-dev libfabric-dev libfabric-bin jq nlohmann-json3-dev
+apt install -y curl libcurl4-gnutls-dev build-essential gfortran libmysqlclient-dev xorg-dev libglu1-mesa-dev libfftw3-dev libxml2-dev git unzip autoconf automake autopoint texinfo gettext libtool libtool-bin pkg-config bison flex libperl-dev libbz2-dev swig liblzma-dev libnanomsg-dev rsync lsb-release environment-modules libglfw3-dev libtbb-dev python3-venv libncurses-dev software-properties-common cmake gsl-bin libgsl-dev python3-dev python3-pip libboost-all-dev libcgal-dev vc-dev libfastjet-dev libfastjet-fortran-dev libfastjetplugins-dev libfastjettools-dev gcc-10 g++-10 gfortran-10 clang-12 libclang-12-dev libuv1-dev libutf8proc-dev libfabric-dev libfabric-bin jq nlohmann-json3-dev liblz4-dev python-dev-is-python3 python-is-python3
 
 echo "update symlinks to point to newest compiler version (at least for ubuntu 20.04)"
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
@@ -73,7 +73,7 @@ apt autoremove -y
 apt autoclean -y
 
 # install root standalone if needed
-# pushd /home/vagrant
+# pushd /vagrant
 # update link for newest version
 # wget "https://root.cern/download/root_v6.24.06.Linux-ubuntu20-x86_64-gcc9.3.tar.gz"
 # tar xfv root_v6.24.04.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
@@ -83,8 +83,8 @@ apt autoclean -y
 
 # better run this interactively inside the machine
 # echo "setup aliroot"
-# mkdir /home/vagrant/alice
-# pushd /home/vagrant/alice
+# mkdir -p /vagrant/alice
+# pushd /vagrant/alice
 # aliBuild init AliPhysics@master
 # is o2 new standart?
 # aliDoctor AliPhysics --defaults o2
@@ -94,8 +94,8 @@ apt autoclean -y
 
 # better run this interactively inside the machine
 # echo "setup O2"
-# mkdir /home/vagrant/o2
-# pushd /home/vagrant/o2
+# mkdir -p /vagrant/o2
+# pushd /vagrant/o2
 # aliBuild init O2@dev --defaults o2
 # aliBuild init O2Physics@master --defaults o2
 # aliDoctor O2Physics --defaults o2
