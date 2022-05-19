@@ -2,17 +2,10 @@
 # File              : .bashrc_remote
 # Author            : Anton Riedel <anton.riedel@tum.de>
 # Date              : 09.08.2021
-# Last Modified Date: 22.11.2021
+# Last Modified Date: 19.05.2022
 # Last Modified By  : Anton Riedel <anton.riedel@tum.de>
 
 # setup for aliphysics development
-export ALICE="$HOME/alice"
-export O2="$HOME/o2"
-export ALICE_ANALYSIS="$HOME/Analysis"
-export GRID_UTILITY_SCRIPTS="$HOME/GridUtilityScripts"
-alias ali="pushd $ALICE && alienv enter AliPhysics/latest --shellrc && popd"
-alias o2="pushd $O2 && alienv enter O2Physics/latest ninja/latest --shellrc && popd"
-[ -d "$HOME/GridUtilityScripts" ] && source $HOME/GridUtilityScripts/SetupEnv.sh &>/dev/null
-
-# activate root
-[ -d "$HOME/root" ] && source $HOME/root/bin/thisroot.sh
+alias ali="pushd $HOME/aliphysics && alienv enter AliPhysics/latest --shellrc && popd"
+alias o2="pushd $HOME/02 && alienv enter O2Physics/latest ninja/latest --shellrc && popd"
+[ -d "$HOME/GridUtilityScripts" ] && source $HOME/GridUtilityScripts/SetupEnv.sh
