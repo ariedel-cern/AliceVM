@@ -1,0 +1,74 @@
+# File              : Vagrantfile
+# Author            : Anton Riedel <anton.riedel@tum.de>
+# Date              : 27.08.2021
+# Last Modified Date: 23.07.2022
+# Last Modified By  : Anton Riedel <anton.riedel@tum.de>
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # general setup
+  config.vm.define "alice" do |alice|
+    alice.vm.hostname = "alice"
+    alice.vm.box = "generic/centos7"
+    alice.vm.box_check_update = false
+
+    # libvirt setup
+    alice.vm.provider :libvirt do |v|
+      v.memory = 26624 # 26*1024
+      v.cpus = 16
+
+    end
+
+    # share data between host and guest
+    alice.vm.synced_folder "vagrant", "/vagrant", type: "nfs", nfs_udp: false, nfs_version: 4
+
+    # provisioning
+    alice.vm.provision "shell", inline: <<-SHELL
+#!/bin/bash
+
+echo "Set Timezone"
+timedatectl set-timezone Europe/Berlin
+
+cat << EOF > /etc/yum.repos.d/alice-system-deps.repo
+[alice-system-deps]
+name=alice-system-deps
+baseurl=https://s3.cern.ch/swift/v1/alibuild-repo/RPMS/o2-full-deps_x86-64/
+enabled=1
+gpgcheck=0
+EOF
+
+yum update -y
+yum install -y alice-o2-full-deps 
+yum update -y
+yum install -y alibuild
+
+yum install cmake cmake3 lz4 lz4-devel gcc-gfortran utf8proc utf8proc-devel gsl gsl-devel tbb tbb-devel
+
+# better run this interactively inside the machine
+# echo "setup aliroot"
+# mkdir -p /vagrant/alice
+# pushd /vagrant/alice
+# aliBuild init AliPhysics@master
+# is o2 new standart?
+# aliDoctor AliPhysics --defaults o2
+# aliBuild build AliPhysics --defaults o2 --debug --always-prefer-system
+# chown -R vagrant:vagrant /home/vagrant/alice
+# popd
+
+# better run this interactively inside the machine
+# echo "setup O2"
+# mkdir -p /vagrant/o2
+# pushd /vagrant/o2
+# aliBuild init O2@dev --defaults o2
+# aliBuild init O2Physics@master --defaults o2
+# aliDoctor O2Physics --defaults o2
+# aliBuild build O2Physics --defaults o2 --debug --always-prefer-system
+# chown -R vagrant:vagrant /home/vagrant/o2
+# popd
+
+exit 0
+    SHELL
+  end
+end
