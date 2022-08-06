@@ -19,7 +19,6 @@ echo "setup AliPhysics"
 mkdir -p $ALICE
 pushd $ALICE
 /home/vagrant/.local/bin/aliBuild init AliPhysics@master --defaults o2
-/home/vagrant/.local/bin/aliDoctor AliPhysics --defaults o2 >AliPhysics.log
 # aliBuild build AliPhysics --defaults o2 --debug --always-prefer-system
 popd
 
@@ -28,7 +27,7 @@ echo "setup O2"
 mkdir -p $ALICE
 pushd $ALICE
 /home/vagrant/.local/bin/aliBuild init O2Physics@master --defaults o2
-/home/vagrant/.local/bin/aliDoctor O2Physics --defaults o2 >O2Physics.log
+# /home/vagrant/.local/bin/aliDoctor O2Physics --defaults o2 >O2Physics.log
 # aliBuild build O2Physics --defaults o2 --debug --always-prefer-system
 popd
 
