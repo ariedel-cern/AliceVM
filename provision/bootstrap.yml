@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - packages
+    - linuxbrew
+    - user_config
+    - alibuild
+    - dev_init

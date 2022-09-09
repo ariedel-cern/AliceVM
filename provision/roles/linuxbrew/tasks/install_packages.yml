@@ -1,0 +1,4 @@
+---
+- name: Install packages with homebrew
+  command: sh -c "ulimit -n 8192; eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv); /home/linuxbrew/.linuxbrew/bin/brew install {{ item }}"
+  loop: "{{ linuxbrew_packages }}"

@@ -1,0 +1,16 @@
+#!/bin/bash
+# File              : .bashrc_remote
+# Author            : Anton Riedel <anton.riedel@tum.de>
+# Date              : 09.08.2021
+# Last Modified Date: 09.09.2022
+# Last Modified By  : Anton Riedel <anton.riedel@tum.de>
+
+# setup for aliphysics development
+alias ali='cd $HOME/alice && alienv enter AliPhysics/latest --shellrc'
+alias install_aliphysics='cd $HOME/alice && aliBuild build AliPhysics'
+alias o2='cd $HOME/alice && alienv enter O2Physics/latest ninja/latest --shellrc'
+alias install_o2physics='cd $HOME/alice && aliBuild build O2Physics'
+alias alien='cd $HOME/alice && alienv enter xjalienfs/latest --shellrc'
+alias setup_brew='eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+
+[ -d "/vagrant/GridUtilityScripts" ] && source "/vagrant/GridUtilityScripts/SetupEnv.sh"

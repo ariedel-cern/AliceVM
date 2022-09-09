@@ -1,0 +1,10 @@
+---
+- name: Check if linuxbrew is installed
+  stat:
+    path: /home/linuxbrew/.linuxbrew/bin/brew
+  register: brew
+
+- include_tasks: install_linuxbrew.yml
+  when: brew.stat.exists == false
+
+- include_tasks: install_packages.yml

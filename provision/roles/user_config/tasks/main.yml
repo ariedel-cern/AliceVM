@@ -1,0 +1,16 @@
+---
+- name: Clone Dotfiles repo
+  git:
+    repo: "https://github.com/AntonRiedel/Dotfiles"
+    dest: /home/vagrant/Dotfiles
+
+- name: Deploy user config
+  command: sh -c "ansible-playbook /home/vagrant/Dotfiles/bootstrap.yml"
+
+- name: Copy config files to virtual machine
+  copy:
+    dest: "/home/vagrant/{{ item }}"
+    src: "{{ item }}"
+  loop:
+    - .globus
+    - .bashrc_remote

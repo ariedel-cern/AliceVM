@@ -1,0 +1,15 @@
+- name: Create folder for development
+  file:
+    path: /home/vagrant/alice
+    state: directory
+    owner: vagrant
+    group: vagrant
+
+- name: Turn of aliBuild analytics
+  command: sh -c "aliBuild analytics off"
+
+- name: Initialize O2Physics development packages
+  command: sh -c "cd /home/vagrant/alice; aliBuild init O2Physics@master"
+
+- name: Initialize AliPhysics development packages
+  command: sh -c "cd /home/vagrant/alice; aliBuild init AliPhysics@master"

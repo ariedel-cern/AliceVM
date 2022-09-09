@@ -1,0 +1,14 @@
+---
+- name: Install packages for alice development
+  become: yes
+  apt:
+      name: "{{ item }}"
+      state: latest
+  loop: "{{ ubuntu_alice_packages }}"
+
+- name: Install general development packages
+  become: yes
+  apt:
+      name: "{{ item }}"
+      state: latest
+  loop: "{{ ubuntu_dev_packages }}"

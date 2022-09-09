@@ -1,1 +1,1 @@
-# Vagrantfile for AliPhysics development
+# Vagrantfile for Alice software development

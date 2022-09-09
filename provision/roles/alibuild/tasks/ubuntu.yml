@@ -1,0 +1,12 @@
+---
+- name: Add alibuild ppa
+  become: yes
+  apt_repository:
+    repo: 'ppa:alisw/ppa'
+
+- name: Install alibuild
+  become: yes
+  apt:
+    name: python3-alibuild
+    state: present
+    update_cache: yes
