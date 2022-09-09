@@ -1,4 +1,3 @@
 .vagrant
 vagrant/*
 !vagrant/.gitkeep
-Vagrantfile
