@@ -7,10 +7,34 @@
 - name: Deploy user config
   command: sh -c "ansible-playbook /home/vagrant/Dotfiles/bootstrap.yml"
 
-- name: Copy config files to virtual machine
+- name: Deploy remote bashrc
   copy:
-    dest: "/home/vagrant/{{ item }}"
-    src: "{{ item }}"
+    dest: /home/vagrant/.bashrc_remote
+    src: .bashrc_remote
+
+- name: Deploy grid secrets
+  copy:
+    src: "/home/anton/.globus/{{ item }}"
+    dest: "/home/vagrant/.globus/{{ item }}"
+    mode: "600"
   loop:
-    - .globus
-    - .bashrc_remote
+    - usercert.pem
+    - userkey.pem
+
+- name: Deploy ssh config
+  copy:
+    src: config.ssh
+    dest: /home/vagrant/.ssh/config
+
+- name: Deploy ssh keys
+  copy:
+    src: "/home/anton/.ssh/key/{{ item }}"
+    dest: "/home/vagrant/.ssh/{{ item }}"
+    mode: "600"
+  loop:
+    - github_cern
+    - github_cern.pub
+# - name: Deploy git config
+#   copy:
+#     src:
+#     dest: "/home/vagrant/.ssh/{{ item }}"

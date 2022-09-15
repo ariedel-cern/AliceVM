@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   # general setup
   config.vm.define "alice" do |alice|
     alice.vm.hostname = "alice"
-    alice.vm.box = "generic/ubuntu2204"
+    alice.vm.box = "generic/ubuntu2004"
 
     # libvirt setup
     alice.vm.provider :libvirt do |v|

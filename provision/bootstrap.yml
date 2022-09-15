@@ -1,6 +1,7 @@
 ---
 - hosts: all
   roles:
+    - misc
     - packages
     - linuxbrew
     - user_config

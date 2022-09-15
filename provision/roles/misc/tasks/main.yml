@@ -1,0 +1,14 @@
+---
+- name: Set timezone
+  become: yes
+  timezone:
+    name: Europe/Berlin
+
+- name: Increase the limit for open files
+  become: yes
+  copy:
+    src: 00-vagrant-limits.conf
+    dest: /etc/security/limits.d/00-vagrant-limits.conf
+    owner: root
+    group: root
+    mode: "644"

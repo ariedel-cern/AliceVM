@@ -15,9 +15,6 @@
   register: install_result
   changed_when: "install_result.rc == 0"
 
-- name: Update linuxbrew
-  command: sh -c "/home/linuxbrew/.linuxbrew/bin/brew upgrade --force --quite"
-
 - name: Remove temporary directory
   file:
     path: "{{ linuxbrew_install_tmp }}"
