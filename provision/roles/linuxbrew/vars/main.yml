@@ -5,6 +5,7 @@ linuxbrew_packages:
   - gcc
   - neovim
   - prettier
-  - pyright
   - shfmt
+  - pyright
+  - bash-language-server
   # - root
