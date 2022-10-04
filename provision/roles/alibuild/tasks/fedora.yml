@@ -1,0 +1,5 @@
+---
+- name: Install alibuild with pip (installing systemwide is broken)
+  pip:
+    name: alibuild
+    extra_args: --user

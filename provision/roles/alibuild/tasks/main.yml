@@ -2,3 +2,7 @@
 - name: Install alibuild on ubuntu
   include_tasks: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
+
+- name: Install alibuild on fedora
+  include_tasks: fedora.yml
+  when: ansible_distribution == "Fedora"

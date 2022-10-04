@@ -1,0 +1,23 @@
+---
+- name: Add alice repo
+  become: yes
+  copy:
+    src: alice-system-deps.repo
+    dest: /etc/yum.repos.d/alice-system-deps.repo
+    owner: root
+    group: root
+
+- name: Install packages for alice development
+  become: yes
+  dnf:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  loop: "{{ fedora_alice_packages }}"
+
+- name: Install general development packages
+  become: yes
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ fedora_dev_packages }}"

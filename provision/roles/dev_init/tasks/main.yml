@@ -6,10 +6,10 @@
     group: vagrant
 
 - name: Turn of aliBuild analytics
-  command: sh -c "aliBuild analytics off"
+  command: sh -c "PATH=/home/vagrant/.local/bin:$PATH aliBuild analytics off"
 
 - name: Initialize O2Physics development packages
-  command: sh -c "cd /home/vagrant/alice; aliBuild init O2Physics@master"
+  command: sh -c "cd /home/vagrant/alice; PATH=/home/vagrant/.local/bin:$PATH aliBuild init O2Physics@master"
 
 - name: Initialize AliPhysics development packages
-  command: sh -c "cd /home/vagrant/alice; aliBuild init AliPhysics@master"
+  command: sh -c "cd /home/vagrant/alice; PATH=/home/vagrant/.local/bin:$PATH aliBuild init AliPhysics@master"

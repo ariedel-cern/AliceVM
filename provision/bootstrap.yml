@@ -3,7 +3,6 @@
   roles:
     - misc
     - packages
-    - linuxbrew
     - user_config
     - alibuild
     - dev_init

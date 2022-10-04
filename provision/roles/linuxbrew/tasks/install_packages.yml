@@ -1,7 +1,0 @@
----
-- name: Install packages with homebrew
-  homebrew:
-    path: "/home/linuxbrew/.linuxbrew/bin"
-    name: "{{ item }}"
-    update_homebrew: yes
-  loop: "{{ linuxbrew_packages }}"

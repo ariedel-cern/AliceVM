@@ -12,6 +12,11 @@
     dest: /home/vagrant/.bashrc_remote
     src: .bashrc_remote
 
+- name: Create globus directory
+  file:
+    path: /home/vagrant/.globus
+    state: directory
+
 - name: Deploy grid secrets
   copy:
     src: "/home/anton/.globus/{{ item }}"

@@ -37,14 +37,14 @@ ubuntu_alice_packages:
   - graphviz
   - libncurses-dev
   - software-properties-common
-  # - liblz4-dev
-  # - libgsl-dev
-  # - libutf8proc-dev
-  # - libtbb2-dev
-  # - libuv1-dev
-  # - libsqlite3-dev
-  # - libfabric-dev
-  # - gtk-doc-tools
+  - liblz4-dev
+  - libgsl-dev
+  - libutf8proc-dev
+  - libtbb2-dev
+  - libuv1-dev
+  - libsqlite3-dev
+  - libfabric-dev
+  - gtk-doc-tools
 
 ubuntu_dev_packages:
   - neovim
@@ -58,3 +58,41 @@ ubuntu_dev_packages:
   - fd-find
   - ripgrep
   - ansible
+
+fedora_alice_packages:
+  - dnf-plugins-core
+  - "@Development tools"
+  - alice-o2-full-deps
+  - python3-pip
+  - gcc-gfortran
+  - libuv-devel
+  - lz4-devel
+  - gsl-devel
+  - tbb-devel
+  - utf8proc-devel
+  - glfw-devel
+  - fftw-devel
+  - libfabric-devel
+  - gtk-doc
+  - python
+  - python3-devel
+  - json-c-devel
+  - libuuid-devel
+
+fedora_dev_packages:
+  - neovim
+  - python3-neovim
+  - moreutils
+  - parallel
+  - entr
+  - jq
+  - cmake
+  - black
+  - shfmt
+  - fzf
+  - fd-find
+  - ripgrep
+  - ansible
+  - root
+  - clang-tools-extra
+  - clang

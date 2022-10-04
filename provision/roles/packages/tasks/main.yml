@@ -1,5 +1,8 @@
 ---
-
 - name: Install prerequisites for ubuntu
   include_tasks: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
+
+- name: Install prerequisites for fedora
+  include_tasks: fedora.yml
+  when: ansible_distribution == "Fedora"
